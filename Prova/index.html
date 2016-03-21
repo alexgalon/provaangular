@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>A Web Page</title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/myApp.js"></script>
+	<script type="text/javascript" src="js/controller/formCtrl.js"></script>
+</head>
+<head>
+	<title>A Web Page From Alex Galon</title>
+</head>
+
+<body ng-controller="FormCtrl">
+
+	<div class="container">
+		<div class="jumbotron">
+		    <div class="row">
+		        <div role="main" class="col-md-4">
+					<form role="form">
+						<legend ng-show="!clicouEditar">Cadastrar</legend>
+
+						<legend ng-show="clicouEditar">Editar</legend>
+
+						<div class="form-group">
+					    	<label for="nome">Nome</label>
+					    	<input type="text" id="nome" class="form-control" ng-model="nome"</input>
+
+					  	</div>
+
+					  	<div class="form-group">
+					    	<label for="email">E-mail</label>
+					    	<input type="email" id="email" class="form-control" ng-model="email"</input>
+					  	</div>
+
+					  	<div class="form-group">
+					    	<label for="fone">Telefone</label>
+					    	<input type="text" id="fone" class="form-control" ng-model="fone"</input>
+					  	</div>	
+					  
+					  	<div ng-show="!clicouEditar">
+					  		<button class="btn btn-primary pull-right" ng-click="adicionarCadastro(nome,email,fone)">Adicionar</button>
+					  	</div>
+
+					  	<div ng-show="clicouEditar">
+					  		<div class="col-md-8">
+					  			<button class="btn btn-primary pull-right" ng-click="renomearCadastro(nome,email,fone)">Salvar</button>
+							</div>	  			
+
+							<div class="col-md-4">
+								<button class="btn btn-danger pull-right" ng-click="cancelarEditar()">Cancelar</button>
+							</div>
+					  	</div>				  
+					</form>	       	
+		        </div>
+
+		        <aside role="complementary" class="col-md-8">
+					
+					<div class="border" ng-show="showTabela">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>E-mail</th>
+									<th>Telefone</th>
+									<th>Opções</th>
+								</tr>
+							</thead>
+						
+							<tbody>
+								<tr ng-repeat="item in list | filter:search">
+									
+									<td ng-bind="item.nomeCad"></td>
+									<td ng-bind="item.emailCad"></td>
+									<td ng-bind="item.foneCad"></td>
+									<td>
+										<button class="btn btn-danger" ng-click="removerCadastro($index)">
+											<i class="glyphicon glyphicon-trash"></i>	
+										</button>
+
+										<button class="btn btn-success" ng-click="editarCadastro($index)">
+											<i class="glyphicon glyphicon-pencil"></i>	
+										</button>
+									</td>	
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+		        </aside>
+		    </div>
+		</div> 
+	</div>  
+</body>
+</html>
